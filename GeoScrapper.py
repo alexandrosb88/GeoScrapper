@@ -1,5 +1,7 @@
 #GeoScrapper
 
+# Copyright (c) 2024 alexandrosb88
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
@@ -30,8 +32,8 @@ def generate_coordinates(north, south, east, west):
 
     print("Generating list of coordinates for the selected region...")
     
-    for lat in range(west[1], east[1], 1000):
-        for long in range (south[0], north[0], 1000):
+    for lat in range(south[0], north[0], 1000):
+        for long in range(west[1], east[1], 1000):
             
             coordinates.append((lat, long))
 
@@ -59,8 +61,8 @@ def scrape_map(coordinates):
 
         for point in coordinates:
 
-            long = str(point[0])
-            lat = str(point[1])
+            lat = str(point[0])
+            long = str(point[1])
 
             lat = lat[:2] + '.' + lat[2:]
             long = long[:2] + '.' + long[2:]
@@ -86,13 +88,16 @@ def scrape_map(coordinates):
         driver.quit()
 
 
-# Example usage
+'''
+Example usage
 
-#north, south, east, west = define_region()
 north = [3800263,2383233]
 south = [3784458,2383233]
 east = [3792149,2385576]
 west = [3792149,2375748]
+'''
+
+north, south, east, west = define_region()
 coordinates = generate_coordinates(north, south, east, west)
 scrape_map(coordinates)
 
